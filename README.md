@@ -7,6 +7,7 @@ Front
 
 Back  
 - PHP
+- SQL (MariaDB)
 
 Organization  
 - The project is based on a MVC Architecture
