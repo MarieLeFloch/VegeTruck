@@ -1,5 +1,13 @@
 <?php
 
+// On indique le namespace ("dossier virtuel") où se trouve notre fichier
+namespace App\Models;
+
+// On inclut Database et PDO pour nos requêtes SQL
+use App\Utils\Database;
+use PDO;
+
+
 class Schedule
 {
     //* Définition des propriétés du Model (= BDD) */
@@ -7,6 +15,7 @@ class Schedule
     private $day;
     private $open_hour;
     private $close_hour;
+    private $place;
     private $created_at;
     private $updated_at;
 
@@ -45,6 +54,15 @@ class Schedule
     {
         $this->close_hour = $close_hour;
     }
+    public function getPlace()
+    {
+        return $this->place;
+    }
+
+    public function setPlace($place)
+    {
+        $this->place = $place;
+    }
 
     public function getCreatedAt()
     {
@@ -74,7 +92,8 @@ class Schedule
         // Récupération des données
         // On utilise fetchAll, méthode de PDO
         // On indique en option qu'on veut retourner une instance de la classe Schedule
-        $scheduleList = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Schedule');
+        // On indique la classe courante avec self::class
+        $scheduleList = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
 
         // On retourne le résultat
         return $scheduleList;

@@ -1,5 +1,11 @@
 <?php
 
+// On indique le namespace
+namespace App\Utils;
+// On inclut PDO
+use PDO;
+
+
 class Database
 {
     /** @var PDO */

@@ -3,7 +3,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand text-white" href="./index.html"><i class="bi bi-flower3"></i> Vege'Truck</a>
+          <a class="navbar-brand text-white" href="<?= $router->generate('main-home')?>"><i class="bi bi-flower3"></i> Vege'Truck</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -11,13 +11,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav px-1 text-white">
             <li class="nav-item btn-outline-light">
-                <a class="nav-link" href="./index.html">Accueil</a>
+                <a class="nav-link" href="<?= $router->generate('main-home')?>">Accueil</a>
               </li>
               <li class="nav-item btn-outline-light">
-                <a class="nav-link" href="./menu.html">Carte</a>
+                <a class="nav-link" href="<?= $router->generate('menu') ?>">Carte</a>
               </li>
             <li class="nav-item btn-outline-light">
-                <a class="nav-link active " aria-current="page" href="./schedule.html">Horaires</a>
+                <a class="nav-link active " aria-current="page" href="<?= $router->generate('schedule') ?>">Horaires</a>
             </li>
           </ul>
         </div>
@@ -40,12 +40,16 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <!--Dynamisation de l'affichage des horaires 
+                  On boucle sur scheduleList, qui contient une liste (un array) d'objet pour chaque ligne de notre table. Comme il s'agit à chaque fois d'instance de notre classe Schedule, on à accès à ses getters-->
+                  <?php foreach ($scheduleList as $schedule) : ?>
                   <tr>
-                    <th scope="row">Monday</th>
-                    <td>12 am</td>
-                    <td>16 pm</td>
-                    <td>Scaly Place</td>
+                    <th scope="row"><?= $schedule->getDay()?></th>
+                    <td><?= $schedule->getOpenningHour()?> am</td>
+                    <td><?= $schedule->getClosingHour()?> pm</td>
+                    <td><?= $schedule->getPlace()?></td>
                   </tr>
+                  <?php endforeach ?>
                 </tbody>
               </table>
 

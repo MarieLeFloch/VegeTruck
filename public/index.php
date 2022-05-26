@@ -10,15 +10,15 @@
 // On utilise __DIR__ pour que l'url soit relatif - s'adapte à chaque org
 // Autoload pour Altorouter
 require __DIR__ . '/../vendor/autoload.php';
-// Nos controllers
-require __DIR__ . '/../app/Controllers/MainController.php';
-require __DIR__ . '/../app/Controllers/MenuController.php';
-require __DIR__ . '/../app/Controllers/ScheduleController.php';
-// Notre fichier gérant la connexion à la BDD
-require __DIR__ . '/../app/Utils/Database.php';
-// Nos Models
-require __DIR__ . '/../app/Models/Menu.php';
-require __DIR__ . '/../app/Models/Schedule.php';
+// // Nos controllers
+// require __DIR__ . '/../app/Controllers/MainController.php';
+// require __DIR__ . '/../app/Controllers/MenuController.php';
+// require __DIR__ . '/../app/Controllers/ScheduleController.php';
+// // Notre fichier gérant la connexion à la BDD
+// require __DIR__ . '/../app/Utils/Database.php';
+// // Nos Models
+// require __DIR__ . '/../app/Models/Menu.php';
+// require __DIR__ . '/../app/Models/Schedule.php';
 
 
 //*** On utilise Altorouter - installé via le composer ***/
@@ -94,7 +94,9 @@ if ($match !== false) {
     $routeDatas = $match['target'];
 
     //1.2 On récupère le nom du controller concerné
-    $controllerToInstanciate = $routeDatas['controller'];
+    // On met l'adresse entière avec le namespace
+    // On met les \\ pour éviter que ça soit considéré comme un antislash
+    $controllerToInstanciate = 'App\\Controllers\\'.$routeDatas['controller'];
 
     //1.3 Idem pour la méthode
     $methodToUse = $routeDatas['method'];
@@ -109,6 +111,7 @@ if ($match !== false) {
 
 // Sinon, si la valeur passée en paramètre de l'url ne correspond à aucune route, on renvoie vers une page d'erreur
 }else{
-    $controller = new MainController();
+    // Pour utiliser notre controller, on indique son nom entier avec le namespace
+    $controller = new App\Controllers\MainController();
     $controller->notFound404();
 }

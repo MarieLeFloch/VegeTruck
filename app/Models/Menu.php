@@ -1,5 +1,12 @@
 <?php
 
+// On indique le namespace ("dossier virtuel") où se trouve notre fichier
+namespace App\Models;
+
+// On inclut Database et PDO pour nos requêtes SQL
+use App\Utils\Database;
+use PDO;
+
 class Menu
 {
     //* Définition des propriétés du Model (= BDD) */
@@ -90,7 +97,8 @@ class Menu
         // Récupération des données
         // On utilise fetchAll, méthode de PDO
         // On indique en option qu'on veut retourner une instance de la classe Menu
-        $menuList = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Menu');
+        // On indique la classe courante avec self::class (évite de mettre tout le namespace)
+        $menuList = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
 
         // On retourne le résultat
         return $menuList;

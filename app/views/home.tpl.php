@@ -2,7 +2,7 @@
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand text-white" href="./index.html"><i class="bi bi-flower3"></i> Vege'Truck</a>
+          <a class="navbar-brand text-white" href="<?= $router->generate('main-home')?>"><i class="bi bi-flower3"></i> Vege'Truck</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -10,13 +10,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav px-1 text-white">
             <li class="nav-item btn-outline-light">
-              <a class="nav-link active " aria-current="page" href="./index.html">Accueil</a>
+              <a class="nav-link active " aria-current="page" href="<?= $router->generate('main-home')?>">Accueil</a>
             </li>
             <li class="nav-item btn-outline-light">
-              <a class="nav-link" href="./menu.html">Carte</a>
+              <a class="nav-link" href="<?= $router->generate('menu')?>">Carte</a>
             </li>
             <li class="nav-item btn-outline-light">
-              <a class="nav-link" href="./schedule.html">Horaires</a>
+              <a class="nav-link" href="<?= $router->generate('schedule') ?>">Horaires</a>
             </li>
           </ul>
         </div>
@@ -30,7 +30,7 @@
           <div class="card-img-overlay">
             <h5 class="card-title home__title">Bienvenue chez Vege'Truck</h5>
             <p class="card-text home__present">Toute l'année, nous proposons des produits locaux, de saison et 100% végétaliens.</p>
-            <a type="button" class="btn btn-dark btn-outline-light " href="./menu.html">Voir la carte</a>
+            <a type="button" class="btn btn-dark btn-outline-light " href="<?= $router->generate('menu')?>">Voir la carte</a>
           </div>
         </div>
       </main>
