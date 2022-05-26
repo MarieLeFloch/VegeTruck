@@ -1,0 +1,15 @@
+{
+    "name": "student/vege-truck",
+    "autoload": {
+        "psr-4": {
+            "Student\\VegeTruck\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MarieLeFloch",
+            "email": "marie-le.floch@hotmail.fr"
+        }
+    ],
+    "require": {}
+}
