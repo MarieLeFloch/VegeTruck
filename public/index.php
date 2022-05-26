@@ -8,50 +8,83 @@
 
 //*** On inclut les classes ***/
 // On utilise __DIR__ pour que l'url soit relatif - s'adapte à chaque org
+require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../app/Controllers/MainController.php';
 require __DIR__ . '/../app/Controllers/MenuController.php';
 require __DIR__ . '/../app/Controllers/ScheduleController.php';
 
 
-//*** On récupère le paramètre de l'url***/
+//*** On utilise Altorouter - installé via le composer ***/
 
-// var_dump($_GET); 
-// On voit que dès qu'on tape quelque chose à la suite de public/, cela crée un paramètre _url dans notre superglobale $_GET qui contient la valeur entrée
+$router = new AltoRouter();
 
-if (isset($_GET['_url'])) {
-    // Si on a un paramètre d'url existant, on récupère sa valeur, et cela devra correspondre à la page à afficher
-    $pageToDisplay = $_GET['_url'];
-} else {
-    // sinon, si on a rien rentré, par défaut, on affiche la page d'accueil, soit ...public/
-    $pageToDisplay = '/';
-}
+// var_dump($_SERVER); 
+// On voit que dans la superglobale $_SERVER, on a notamment 'BASE_URI' => string '/VegeTruck/public' (length=17)
+// On utilise la valeur de cette clé pour définir la racine de notre projet
+
+// On utilise la méthode setBasePath() de Altorouter, pour définir une racine de projet dynamique
+$router->setBasePath($_SERVER['BASE_URI']);
+
 
 //*** On définit les routes ***/
 
 // On crée un tableau de routes
-// On associe l'url à la méthode du controller
+// Avec AltoRouter, on utilise la méthode map() pour gérer les routes, on fourni :
+// 1- la méthode HTTP (get) autorisée pour la route
+// 2- la partie d'url correspondant à la page
+// 3- dans un tableau, les infos sur les controllers et méthodes
+// 4- et à la fin, un identifiant unique de la route
 
-$routes = [
-    '/' => [
+//* Page d'accueil
+$router->map(
+    'GET', 
+    '/', 
+    [
         'controller' => 'MainController',
         'method' => 'home'
     ],
-    '/menu' => [
+    'main-home' 
+);
+
+//* Page du menu
+$router->map(
+    'GET', 
+    '/menu', 
+    [
         'controller' => 'MenuController',
         'method' => 'menu'
     ],
-    '/schedule' => [
+    'menu' 
+);
+
+//* Page des horaires
+$router->map(
+    'GET', 
+    '/schedule', 
+    [
         'controller' => 'ScheduleController',
         'method' => 'schedule'
-    ]
-];
+    ],
+    'schedule' 
+);
 
-//*** On instancie le controller en fonction de la route demandée ***/
+//* On appelle la méthode match() d'Altorouter, qui vérifie que tout est ok
+// Retourne les infos si il y a bien une route correspondant à la page demandée
+$match = $router->match();
+//dump($match);  // VegeTruck/public/
+// ^ array:3 [▼
+//   "target" => array:2 [▶]
+//   "params" => []
+//   "name" => "main-home"
+// ]
+// A ce stade, rien dans params, car correspond à une partie dynamique qui suit l'url qu'on n'a pas encore élaboré (ex : une page d'un plat qui correspondrait à public/menu/2)
 
-// On filtre pour vérifier si la page à afficher, contenue dans l'url, correspond bien à une route définie dans notre tableau des routes
-if (isset($routes[$pageToDisplay])) {
-    //1.1 On récupère les infos de la route demandée, contenues dans le tableau $routes
-    $routeDatas = $routes[$pageToDisplay];
+//*** Si il y a bien une route correspondante, on instancie la controller et on appelle la méthode
+if ($match !== false) {
+
+    // On a une clé target dans notre tableau retourné par match(), qui contient les infos liées au controller et à la méthode
+    //1.1 On récupère ces infos 
+    $routeDatas = $match['target'];
 
     //1.2 On récupère le nom du controller concerné
     $controllerToInstanciate = $routeDatas['controller'];
