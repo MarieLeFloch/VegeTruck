@@ -1,3 +1,5 @@
+<?php //dump($scheduleList);?>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -32,8 +34,8 @@
                 <thead>
                   <tr>
                     <th scope="col"><i class="bi bi-calendar-check"></i> Day</th>
-                    <th scope="col"><i class="bi bi-clock"></i> Opening hours </th>
-                    <th scope="col">Closing hours <i class="bi bi-clock-fill"></i></th>
+                    <th scope="col"><i class="bi bi-clock"></i> Opening hour </th>
+                    <th scope="col">Closing hour <i class="bi bi-clock-fill"></i></th>
                     <th scope="col"><i class="bi bi-geo-alt"></i> Place</th>
                   </tr>
                 </thead>
@@ -43,24 +45,6 @@
                     <td>12 am</td>
                     <td>16 pm</td>
                     <td>Scaly Place</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Wednesday</th>
-                    <td>10 am</td>
-                    <td>17 pm</td>
-                    <td>Bolivar Park</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Friday</th>
-                    <td>11 am</td>
-                    <td>22 pm</td>
-                    <td>Daily Main street</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Saturday</th>
-                    <td>10 am</td>
-                    <td>23 pm</td>
-                    <td>Royal Place</td>
                   </tr>
                 </tbody>
               </table>

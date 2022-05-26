@@ -6,12 +6,19 @@
 // Fichier de configuration du serveur apache
 // Celui-ci fait en sorte que les URL redirigent vers index.php
 
-//*** On inclut les classes ***/
+//*** On inclut les éléments dont on a besoin ***/
 // On utilise __DIR__ pour que l'url soit relatif - s'adapte à chaque org
+// Autoload pour Altorouter
 require __DIR__ . '/../vendor/autoload.php';
+// Nos controllers
 require __DIR__ . '/../app/Controllers/MainController.php';
 require __DIR__ . '/../app/Controllers/MenuController.php';
 require __DIR__ . '/../app/Controllers/ScheduleController.php';
+// Notre fichier gérant la connexion à la BDD
+require __DIR__ . '/../app/Utils/Database.php';
+// Nos Models
+require __DIR__ . '/../app/Models/Menu.php';
+require __DIR__ . '/../app/Models/Schedule.php';
 
 
 //*** On utilise Altorouter - installé via le composer ***/
