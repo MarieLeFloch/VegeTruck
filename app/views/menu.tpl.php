@@ -11,13 +11,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav px-1 text-white">
             <li class="nav-item btn-outline-light">
-                <a class="nav-link" href="<?= $router->generate('main-home')?>">Accueil</a>
+                <a class="nav-link" href="<?= $router->generate('main-home')?>">Home</a>
               </li>
             <li class="nav-item btn-outline-light">
-                <a class="nav-link active " aria-current="page" href="<?= $router->generate('menu') ?>">Carte</a>
+                <a class="nav-link active " aria-current="page" href="<?= $router->generate('menu') ?>">Menu</a>
               </li>
             <li class="nav-item btn-outline-light">
-              <a class="nav-link" href="<?= $router->generate('schedule') ?>">Horaires</a>
+              <a class="nav-link" href="<?= $router->generate('schedule') ?>">Schedule</a>
             </li>
           </ul>
         </div>
@@ -37,10 +37,11 @@
                      if (($menu->getType()) == 1) :?>
                   <div class="col">
                     <div class="card">
-                      <img src="../public/assets/images/<?= $menu->getPicture()?>" class="card-img-top" alt="...">
+                      <img src="assets/images/<?= $menu->getPicture()?>" class="card-img-top" alt="...">
                       <div class="card-body">
                         <h5 class="card-title"><?= $menu->getName()?></h5>
                         <p class="card-text"><?= $menu->getDescription()?></p>
+                        <a type="button" class="btn btn-dark btn-outline-light" href="<?= $router->generate('menu-details', ['id' => $menu->getId()]) ?>">See more</a>
                       </div>
                       <div class="card-footer text-center">
                           <small class="text-muted "><?= $menu->getPrice()?>€</small>
@@ -58,7 +59,7 @@
                 if ($menu->getType() == 2) :?>
               <div class="col">
                 <div class="card">
-                  <img src="../public/assets/images/<?= $menu->getPicture()?>" class="card-img-top" alt="...">
+                  <img src="assets/images/<?= $menu->getPicture()?>" class="card-img-top" alt="...">
                   <div class="card-body">
                     <h5 class="card-title"><?= $menu->getName()?></h5>
                     <p class="card-text"><?= $menu->getDescription()?></p>

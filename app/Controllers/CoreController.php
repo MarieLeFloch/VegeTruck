@@ -11,6 +11,11 @@ class CoreController
     // On utilisera ce paramètre lorsqu'on aura à afficher des données pour un seul élément (ex la page d'un plat)
     protected function display($viewName, $viewData = [])
     {
+        // On enregistre dans une variable la base de notre url
+        // soit ...public/
+        // On va ensuite mettre cette variable dans une balise <base> de notre header, pour éviter tout problème de chemin pour le chargement de nos fichiers (style.css, images)
+        $absoluteURL = $_SERVER['BASE_URI'] . '/';
+
         // On définit $router comme une variable globale
         // De cette façon on y aura accès dans nos templates pour appeler la route via generate()
         global $router;

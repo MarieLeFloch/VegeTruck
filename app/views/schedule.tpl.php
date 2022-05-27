@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav px-1 text-white">
             <li class="nav-item btn-outline-light">
-                <a class="nav-link" href="<?= $router->generate('main-home')?>">Accueil</a>
+                <a class="nav-link" href="<?= $router->generate('main-home')?>">Home</a>
               </li>
               <li class="nav-item btn-outline-light">
                 <a class="nav-link" href="<?= $router->generate('menu') ?>">Carte</a>

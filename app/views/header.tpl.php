@@ -9,8 +9,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
     <!-- On inclut Bootstrap pour les icones-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <!--Dans une balise base, on indique la base du chemin pour notre dossier assets. On sait qu'on l'a dans $_SERVER['BASE_URI'] -->
+    <base href="<?= $absoluteURL ?>">
     <!-- On inclut notre lien style perso-->
-    <link rel="stylesheet" href="../public/assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <title>Vegetruck</title>
 
 </head>

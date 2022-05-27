@@ -104,4 +104,24 @@ class Menu
         return $menuList;
     }
 
+    // Méthode récupérant un plat particulier à partir de l'id
+    public function findById($id)
+    {
+        // On établit la connexion à la BDD via PDO
+        $pdoConnexion = Database::getPDO();
+
+        // Requête SQL
+        $sqlRequest = 'SELECT * FROM `menu` WHERE `id` = ' . $id;
+
+        // Execution de la requête
+        $pdoStatement = $pdoConnexion->query($sqlRequest);
+
+        // Récupération des données
+        // On utilise fetchObject, méthode de PDO, permet de récupérer un seul résultat, sous forme d'objet
+        $menuDetails = $pdoStatement->fetchObject(self::class);
+
+        // On retourne le résultat
+        return $menuDetails;
+    }
+
 }

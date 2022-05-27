@@ -10,15 +10,6 @@
 // On utilise __DIR__ pour que l'url soit relatif - s'adapte à chaque org
 // Autoload pour Altorouter
 require __DIR__ . '/../vendor/autoload.php';
-// // Nos controllers
-// require __DIR__ . '/../app/Controllers/MainController.php';
-// require __DIR__ . '/../app/Controllers/MenuController.php';
-// require __DIR__ . '/../app/Controllers/ScheduleController.php';
-// // Notre fichier gérant la connexion à la BDD
-// require __DIR__ . '/../app/Utils/Database.php';
-// // Nos Models
-// require __DIR__ . '/../app/Models/Menu.php';
-// require __DIR__ . '/../app/Models/Schedule.php';
 
 
 //*** On utilise Altorouter - installé via le composer ***/
@@ -64,6 +55,16 @@ $router->map(
     'menu' 
 );
 
+$router->map(
+    'GET', 
+    '/menu/[i:id]', // Partie dynamique de l'url correspondant à l'integer id
+    [
+        'controller' => 'MenuController',
+        'method' => 'oneMenu'
+    ],
+    'menu-details' 
+);
+
 //* Page des horaires
 $router->map(
     'GET', 
@@ -101,11 +102,15 @@ if ($match !== false) {
     //1.3 Idem pour la méthode
     $methodToUse = $routeDatas['method'];
 
+    //1.4 On récupère le contenu dynamique de l'url
+    $urlParams = $match['params'];
+
     //2.1 On instancie le controller
     $controller = new $controllerToInstanciate();
 
     //2.2 On appelle la méthode
-    $controller->$methodToUse();
+    // On passe en argument les paramètres dynamiques, pour les méthodes qui le nécessitent (sinon sera ignoré)
+    $controller->$methodToUse($urlParams);
 
     //var_dump($routeDatas);
 
